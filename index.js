@@ -1,6 +1,7 @@
 import express from 'express';
 import usersRoute from './routes/Users.js';
 import questionsRoute from './routes/Questions.js';
+import listingsRoute from './routes/Listings.js';
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(allowCrossDomain);
 
 app.use('/users', usersRoute);
 app.use('/questions', questionsRoute);
+app.use('/listings', listingsRoute);
 
 app.use((err, req, res, next) => {
     console.log(err.stack)

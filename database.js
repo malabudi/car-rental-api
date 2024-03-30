@@ -10,6 +10,69 @@ const pool = mysql.createPool({
     database: process.env.MYSQL_DATABASE
 }).promise()
 
+// Car Listings Table
+export async function getListings() {
+    const [rows] = await pool.query(`
+    SELECT * 
+    FROM car_listings
+    `)
+    return rows;
+}
+
+export async function getListingByCarId(carId) {
+    const [rows] = await pool.query(`
+    SELECT * 
+    FROM car_listings
+    WHERE CarId = ?
+    `, [carId])
+    return rows;
+}
+
+export async function getListingByRenteeId(renteeId) {
+    const [rows] = await pool.query(`
+    SELECT * 
+    FROM car_listings
+    WHERE RenteeId = ?
+    `, [renteeId])
+    return rows;
+}
+
+export async function getListingByRenterId(renterId) {
+    const [rows] = await pool.query(`
+    SELECT * 
+    FROM car_listings
+    WHERE RenterId = ?
+    `, [renterId])
+    return rows;
+}
+
+export async function createListing(
+    renteeId, 
+    model, 
+    carYear, 
+    mileage, 
+    availCalendar, 
+    pickUpLocation, 
+    price) {
+    const [result] = await pool.query(`
+    INSERT INTO car_listings (renterId, renteeId, model, carYear, mileage, availCalendar, bookedUntil, pickUpLocation, price, isAvailable, balance)
+    VALUES(NULL, ?, ?, ?, ?, ?, NULL, ?, ?, true, NULL)
+    `, [renteeId, model, carYear, mileage, availCalendar, pickUpLocation, price])
+
+    const id = result.insertId
+    return getListingByRenteeId(id)
+}
+
+export async function updateListing(renteeId, availCalendar, price) {
+    const [result] = await pool.query(`
+    UPDATE car_listings
+    SET AvailCalendar = ?, Price = ?
+    WHERE RenteeId = ?
+    `, [availCalendar, price, renteeId]);
+
+    return result;
+}
+
 // Users Table
 export async function getUserByEmail(email) {
     const [rows] = await pool.query(`

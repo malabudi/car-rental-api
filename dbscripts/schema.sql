@@ -24,5 +24,23 @@ CREATE TABLE Questions (
     PRIMARY KEY     (QuestionID)
 );
 
+CREATE TABLE Car_Listings (
+    CarID               INT NOT NULL AUTO_INCREMENT,
+    RenterId            INT,
+    RenteeId            INT NOT NULL,
+    Model               VARCHAR(20) NOT NULL,
+    CarYear             VARCHAR(4) NOT NULL,
+    Mileage             INT NOT NULL,
+    AvailCalendar       DATE,
+    BookedUntil         DATE,
+    PickUpLocation      VARCHAR(50) NOT NULL,
+    Price               DECIMAL(15,2),
+    IsAvailable         BOOLEAN,
+    Balance             DECIMAL(15,2),
+    PRIMARY KEY         (CarID)
+);
+
 ALTER TABLE Security_Questions ADD CONSTRAINT FK_SecurityQuestions_Users FOREIGN KEY (UserID) REFERENCES Users(UserID);
 ALTER TABLE Security_Questions ADD CONSTRAINT FK_SecurityQuestions_Questions FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID);
+ALTER TABLE Car_Listings ADD CONSTRAINT FK_CarListings_RenterUsers FOREIGN KEY (RenterId) REFERENCES Users(UserID);
+ALTER TABLE Car_Listings ADD CONSTRAINT FK_CarListings_RenteeUsers FOREIGN KEY (RenteeId) REFERENCES Users(UserID);
