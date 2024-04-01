@@ -73,6 +73,28 @@ export async function updateListing(renteeId, availCalendar, price) {
     return result;
 }
 
+// The function to have a renter book a car
+export async function updateBooking(carId, renterId, bookedUntil) {
+    const [result] = await pool.query(`
+    UPDATE car_listings
+    SET RenterId = ?, BookedUntil = ?, IsAvailable = false, Balance = Price
+    WHERE CarID = ?
+    `, [renterId, bookedUntil, carId]);
+
+    return result;
+}
+
+// The function to pay off a balance
+export async function updateBalance(carId, payment) {
+    const [result] = await pool.query(`
+    UPDATE car_listings
+    SET Balance = Balance - ?
+    WHERE CarID = ?
+    `, [payment, carId]);
+
+    return result;
+}
+
 // Users Table
 export async function getUserByEmail(email) {
     const [rows] = await pool.query(`
