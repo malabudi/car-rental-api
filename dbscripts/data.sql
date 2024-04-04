@@ -21,7 +21,7 @@ INSERT INTO security_questions (UserID, QuestionID, Answer)
 VALUES
 (1, 1, 'Austin'),
 (1, 6, 'Black'),
-(1, 10, 'Mickey'),
+(1, 9, 'Mickey'),
 (2, 7, '2020'),
 (2, 4, 'McDonalds'),
 (2, 5, 'Dolma');
