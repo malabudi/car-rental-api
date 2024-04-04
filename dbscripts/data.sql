@@ -28,5 +28,5 @@ VALUES
 
 INSERT INTO car_listings (RenterId, RenteeId, Model, CarYear, Mileage, AvailCalendar, BookedUntil, PickupLocation, Price, IsAvailable, Balance)
 VALUES
-(NULL, 1, Ford, 2012, 102384, '2023-10-18', NULL, 'Detroit, Michigan', 4999.99, true, NULL),
-(NULL, 2, Buick, 2023, 75896, '2024-04-08', NULL, 'Austin, Texas', 6499.98, true, NULL);
+(NULL, 1, 'Ford', 2012, 102384, '2023-10-18', NULL, 'Detroit, Michigan', 4999.99, true, NULL),
+(NULL, 2, 'Buick', 2023, 75896, '2024-04-08', NULL, 'Austin, Texas', 6499.98, true, NULL);
