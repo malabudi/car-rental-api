@@ -2,7 +2,6 @@ USE driveshare;
 
 INSERT INTO users (Email, Password)
 VALUES
-VALUES
 ('testemail@yahoo.com', 'password'),
 ('driveshareuser@gmail.com', 'ilikecars');
 
